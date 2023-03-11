@@ -1,0 +1,45 @@
+﻿@model Admin
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <h1>Edit Data</h1>
+    <form asp-controller="admin" asp-action="edit" method="post">
+        <input asp-for="Id" hidden value="@Model.Id"/>
+
+        <label class="form-label" asp-for="Email">Email</label>
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <input type="email" class="form-control ps-4" asp-for="Email" value="@Model.Email" disabled/>
+
+        <label class="form-label" asp-for="Name">Name</label>
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Name" placeholder="Name" value="@Model.Name"/>
+
+        <label class="form-label" asp-for="Phone">Phone</label>
+        <span asp-validation-for="Phone" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Phone" placeholder="Phone" value="@Model.Phone"/>
+
+        <label class="form-label" asp-for="Age">Age</label>
+        <span asp-validation-for="Age" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Age" placeholder="Age" value="@Model.Age"/>
+
+        <label class="form-label" asp-for="Address">Address</label>
+        <span asp-validation-for="Address" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Address" placeholder="Address" value="@Model.Address"/>
+
+        @if (Model.ErrorMsg != "")
+        {
+            <span class="text-danger">@Model.ErrorMsg</span>
+        }
+
+        <div class="d-flex justify-content-center">
+            <input type="submit" value="Save" />
+        </div>
+
+    </form>
+</div>
+@section Scripts{
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

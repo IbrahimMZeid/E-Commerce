@@ -1,0 +1,107 @@
+﻿@model Dictionary<string, List<Cart>>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int? AdminId = Context.Session.GetInt32("AdminId");
+    int? UserId = Context.Session.GetInt32("UserId");
+    int x = 1;
+
+}
+<div class="container-fluid">
+
+    @foreach (var stats in Model)
+    {
+        <div class="py-4">
+            <h1>@stats.Key</h1>
+        </div>
+        @if (stats.Value.Count == 0)
+        {
+            <div class="width-fit mx-auto"><h2>No Item Found</h2></div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="m-auto">
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var cart in stats.Value)
+                        {
+                            <div class="item mb-4">
+                                <div class="card border-0 shadow bg-dark h-100">
+                                    <img src="@cart.Product.Image" alt="@cart.Product.Title" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">@cart.Product.Title</h5>
+                                        <p class="card-text">Category : @cart.Product.Category.Name</p>
+                                        <p class="card-text">Number : @cart.Number</p>
+                                        <p class="card-text">Time @cart.Time</p>
+                                        <p class="card-text">Price : @cart.Product.Price</p>
+                                        @if (AdminId != null)
+                                        {
+                                            <p class="card-text">Buyer : @cart.User.Email</p>
+
+                                        }
+
+                                        <a asp-controller="product"
+                               asp-action="index"
+                               asp-route-id="@cart.Product.Id" class="btn-primary p-2">Details</a>
+                                        @if (AdminId != null)
+                                        {
+                                            @if (cart.Stats.Equals("In Progress"))
+                                            {
+                                                <a class="btn-secondary p-2"
+                               asp-route-productId="@cart.ProductId"
+                               asp-route-userId="@cart.UserId"
+                               asp-route-time="@cart.Time"
+                               asp-route-stats="Done"
+                               asp-action="changestate">Make it Done</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn-secondary p-2"
+                               asp-route-productId="@cart.ProductId"
+                               asp-route-userId="@cart.UserId"
+                               asp-route-time="@cart.Time"
+                               asp-route-stats="In Progress"
+                               asp-action="changestate">Make it In Progress</a>
+                                            }
+                                        }
+
+                                        <a class="btn-danger p-2"
+                               asp-route-productId="@cart.ProductId"
+                               asp-route-userId="@cart.UserId"
+                               asp-route-time="@cart.Time"
+                               asp-action="removeFromCart" onclick="return confirm('Delete Cart?')">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+@section Scripts{
+    <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: false,
+            margin: 15,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        })
+    </script>
+}

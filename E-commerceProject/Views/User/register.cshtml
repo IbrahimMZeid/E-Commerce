@@ -1,0 +1,56 @@
+﻿@model User
+@{
+    ViewData["Title"] = "register";
+}
+
+<div class="container">
+    <h1>Register</h1>
+    <form asp-controller="user" asp-action="register" method="post" enctype="multipart/form-data">
+        <input asp-for="Id" hidden />
+
+        <label class="form-label" asp-for="Email">Email</label>
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <input type="email" class="form-control ps-4" asp-for="Email" placeholder="Email" />
+
+        <label class="form-label" asp-for="Name">Name</label>
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Name" placeholder="Name" />
+
+        <label class="form-label" asp-for="Phone">Phone</label>
+        <span asp-validation-for="Phone" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Phone" placeholder="Phone" />
+
+        <label class="form-label" asp-for="Age">Age</label>
+        <span asp-validation-for="Age" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Age" placeholder="Age" />
+
+        <label class="form-label" asp-for="Address">Address</label>
+        <span asp-validation-for="Address" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Address" placeholder="Address" />
+
+        <label class="form-label" asp-for="Password">Password</label>
+        <span asp-validation-for="Password" class="text-danger"></span>
+        <input type="password" class="form-control ps-4" asp-for="Password" placeholder="Password" />
+
+        <label class="form-label" asp-for="ConfirmPassword">Confirm Password</label>
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <input type="password" class="form-control ps-4" asp-for="ConfirmPassword" placeholder="Confirm Password" />
+
+        <label class="form-label" asp-for="ProfileImage">Image</label>
+        <input type="file" class="form-control ps-4" asp-for="ProfileImage" />
+
+        @if (Model.ErrorMsg != "")
+        {
+            <span class="text-danger">@Model.ErrorMsg</span>
+        }
+
+        <div class="d-flex justify-content-center">
+            <input type="submit" value="Register" />
+        </div>
+
+    </form>
+</div>
+@section Scripts{
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,0 +1,41 @@
+﻿@model User
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Profile";
+    int? userId = Context.Session.GetInt32("UserId");
+}
+<div class="container-fluid">
+    <div class="card mb-3 bg-transparent">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="@Model.ProfileImage" class="img-fluid rounded-start" alt="@Model.Name">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Name :  @Model.Name</h5>
+                    <h5 class="card-title">Email :  @Model.Email</h5>
+                    <h5 class="card-text">Age : @Model.Age</h5>
+                    <h5 class="card-text">Address : @Model.Address</h5>
+                    @if (userId != null)
+                    {
+                        <a asp-action="edit"
+                       asp-controller="user"
+                       class="btn btn-primary">Edit</a>
+                        <a asp-action="changePass"
+                       asp-controller="user"
+                       class="btn btn-warning">Change Password</a>
+                        <a asp-action="changePicture"
+                       asp-controller="user"
+                       class="btn btn-primary">Change picture</a>
+                        <a asp-action="delete"
+                       asp-controller="user"
+                       class="btn btn-danger" onclick="return confirm('Delete Account?')">Delete</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

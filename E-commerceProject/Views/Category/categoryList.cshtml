@@ -1,0 +1,54 @@
+﻿@model List<Category>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Category List";
+    int? admin = Context.Session.GetInt32("AdminId");
+    int x = 1;
+}
+<div class="container-fluid text-center">
+    @if (admin != null)
+    {
+        <a class="btn btn-success p-2 mx-auto" style="width: 200px;"
+       asp-action="addCategory">Add Category</a>
+       <a class="btn btn-success p-2 mx-auto" style="width: 200px;"
+       asp-action="addProduct"
+       asp-controller="product">Add Product</a>
+
+    }
+    <table class="table table-dark table-hover mt-4">
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Describtion</th>
+                <th scope="col">More</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <th scope="row">@(x++)</th>
+                    <td>@category.Name</td>
+                    <td>@category.Describtion</td>
+                    <td>
+                        <a class="btn-info p-2 m-2"
+                       asp-route-id="@category.Id"
+                       asp-action="index">See</a>
+                        @if (admin != null)
+                        {
+                            <a class="btn-secondary p-2 m-2"
+                       asp-route-id="@category.Id"
+                       asp-action="edit">Edit</a>
+                            <a class="btn-danger p-2 m-2"
+                       asp-route-id="@category.Id"
+                       asp-action="delete" onclick="return confirm('Delete Category?')">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

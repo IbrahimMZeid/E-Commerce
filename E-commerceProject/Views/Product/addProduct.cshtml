@@ -1,0 +1,61 @@
+﻿@model Product
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Add Product";
+}
+<div class="container">
+    <h1>Add Product</h1>
+    <form asp-controller="product" asp-action="addproduct" method="post" enctype="multipart/form-data">
+        <input asp-for="Id" hidden />
+
+        <label class="form-label" asp-for="Title">Title</label>
+        <span asp-validation-for="Title" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Title" placeholder="Title" />
+
+        <label class="form-label" asp-for="Proccessor">Proccessor</label>
+        <span asp-validation-for="Proccessor" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Proccessor" placeholder="Proccessor" />
+
+        <label class="form-label" asp-for="OS">Operating System</label>
+        <span asp-validation-for="OS" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="OS" placeholder="OS" />
+
+        <label class="form-label" asp-for="Storage">Storage</label>
+        <span asp-validation-for="Storage" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Storage" placeholder="Storage" />
+
+        <label class="form-label" asp-for="Ram">Ram</label>
+        <span asp-validation-for="Ram" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Ram" placeholder="Ram" />
+
+        <label class="form-label" asp-for="Describtion">Describtion</label>
+        <span asp-validation-for="Describtion" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Describtion" placeholder="Describtion" />
+
+        <label class="form-label" asp-for="Price">Price</label>
+        <span asp-validation-for="Price" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Price" placeholder="Price" />
+
+        <label class="form-label" asp-for="Discount">Discount</label>
+        <span asp-validation-for="Discount" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Discount" placeholder="Discount" />
+
+        <label class="form-label" asp-for="CategoryId">Category</label>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+        <select class="form-select ps-3 form-select-sm" asp-for="CategoryId" asp-items="@ViewBag.category"></select>
+        
+        <label class="form-label" asp-for="Image">Image</label>
+        <span asp-validation-for="Image" class="text-danger"></span>
+        <input type="file" class="form-control ps-4" asp-for="Image" />
+        
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-success mt-4" value="Add" />
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

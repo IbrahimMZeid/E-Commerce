@@ -1,0 +1,160 @@
+﻿@*
+For more information on enabling MVC for empty projects, visit
+https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int? admin = Context.Session.GetInt32("AdminId");
+    int? user = Context.Session.GetInt32("UserId");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - E_commerceProject</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/all.min.css">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="/css/templatemo-style.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+    <!--
+
+    TemplateMo 560 Astro Motion
+
+    https://templatemo.com/tm-560-astro-motion
+
+    -->
+</head>
+<body>
+    @*  <video  muted loop id="bg-video">
+    <source src="video/gfp-astro-timelapse.mp4" type="video/mp4" >
+    </video>*@
+    <div class="page-container">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="cd-slider-nav">
+                    <nav class="navbar navbar-expand-lg" id="tm-nav">
+                        <a class="navbar-brand" asp-action="index" asp-controller="home"><i class="fa-solid fa-truck-fast fa-2x"></i></a>
+                        <button class="navbar-toggler" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbar-supported-content"
+                                aria-controls="navbarSupportedContent" aria-expanded="false"
+                                aria-label="Toggle navigation show">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse"
+                             id="navbar-supported-content">
+                            <ul class="navbar-nav">
+                                <li class="nav-item ">
+                                    <a class="nav-link" aria-current="page" asp-action="Index" asp-controller="Home"><i class="fa-solid fa-house"></i> Home</a>
+                                </li>
+                                @if (admin == null && user == null)
+                                {
+                                    <li class="nav-item ">
+                                        <a class="nav-link" aria-current="page" asp-action="login" asp-controller="user"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" aria-current="page" asp-action="register" asp-controller="user"><i class="fa-solid fa-user-plus"></i> Register</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" aria-current="page" asp-action="categoryList" asp-controller="category"><i class="fa-solid fa-filter"></i> Categories</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    if (admin == null)
+                                    {
+                                        <li class="nav-item ">
+                                            <a class="nav-link" aria-current="page" asp-action="profile" asp-controller="user"><i class="fa-solid fa-user"></i> profile</a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link" aria-current="page" asp-action="index" asp-controller="cart"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link" aria-current="page" asp-action="categoryList" asp-controller="category"><i class="fa-solid fa-filter"></i> Categories</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="nav-item ">
+                                            <a class="nav-link" aria-current="page" asp-action="profile" asp-controller="admin"><i class="fa-solid fa-user"></i> profile</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <div class="input-group mb-3">
+                                                <a class="btn dropdown-toggle" id="more-nav" role="button" data-bs-toggle="dropdown">More</a>
+                                                <ul class="dropdown-menu" aria-labelledby="more-nav" style="background-color: #364B60;">
+                                                    <li class="nav-item ">
+                                                        <a class="nav-link" aria-current="page" asp-action="index" asp-controller="cart"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+                                                    </li>
+                                                    <li class="nav-item ">
+                                                        <a class="nav-link" aria-current="page" asp-action="categoryList" asp-controller="Category"><i class="fa-solid fa-filter"></i> Categories</a>
+                                                    </li>
+                                                    <li class="nav-item ">
+                                                        <a class="nav-link" aria-current="page" asp-action="addAdmin" asp-controller="Admin"><i class="fa-solid fa-user-plus"></i> Add Admin</a>
+                                                    </li>
+                                                    <li class="nav-item ">
+                                                        <a class="nav-link" aria-current="page" asp-action="userList" asp-controller="user"><i class="fa-solid fa-users"></i> Users</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    }
+                                    <li class="nav-item ">
+                                        <a class="nav-link" aria-current="page" asp-action="logout" asp-controller="user"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid tm-content-container">
+            @RenderBody()
+        </div>
+
+        <footer class="row mx-auto tm-footer">
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <h3 class="mb-4 text-white text-uppercase font-weight-bold">Get In Touch</h3>
+                    <p class="font-weight-medium"> <i class="fa fa-map-marker-alt mr-2"> </i> 123 Street, New York, USA</p>
+                    <p class="font-weight-medium"> <i class="fa fa-phone-alt mr-2"> </i> +012 345 67890</p>
+                    <a href="mailto:info@example.com?subject=Contact"><p class="font-weight-medium"> <i class="fa fa-envelope mr-2"> </i> info@example.com</p></a>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <h3 class="mt-4 mb-3 text-white text-uppercase font-weight-bold"> Follow Us</h3>
+                    <a class="btn btn-lg btn-secondary btn-lg-square mr-2 m-1" href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-lg btn-secondary btn-lg-square mr-2 m-1" href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-lg btn-secondary btn-lg-square mr-2 m-1" href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-lg btn-secondary btn-lg-square mr-2 m-1" href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-lg btn-secondary btn-lg-square m-1" href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 px-0">
+                Copyright 2021 Astro Motion. All rights reserved. &copy; Developed and modified by Ibrahim Zeid
+            </div>
+            <div class="col-md-6 px-0 tm-footer-right">
+                Designed by <a rel="sponsored" href="https://templatemo.com"
+                               target="_blank" class="tm-link-white">TemplateMo</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required:false)
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid my-5">
+    @foreach (var category in Model)
+    {
+        <div class="py-4">
+        <h2><a href="/category/index/@category.Id">@category.Name</a></h2>
+        </div>
+        <div class="row">
+            <div class="m-auto">
+                <div class="owl-carousel owl-theme">
+                    @foreach (var product in category.Products)
+                    {
+                        <div class="item mb-4">
+                            <div class="card border-0 shadow bg-dark h-100">
+                                <img src="@product.Image" alt="@product.Title" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">@product.Title</h5>
+                                    <p class="card-text">Proccessor : @product.Proccessor</p>
+                                    <p class="card-text">OS : @product.OS</p>
+                                    <p class="card-text">Ram : @product.Ram</p>
+                                    <p class="card-text">
+                                        Price :
+                                        @if (product.Discount > 0)
+                                        {
+                                            <s class="text-danger">@product.Price</s>
+                                        }
+                                        @(product.Price - (product.Price * product.Discount /100)) $
+                                    </p>
+                                    <a asp-controller="product"
+                               asp-action="index"
+                               asp-route-id="@product.Id" class="btn btn-primary">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts{
+    @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>*@
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    @*<script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: false,
+            margin: 15,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        })
+    </script>
+}

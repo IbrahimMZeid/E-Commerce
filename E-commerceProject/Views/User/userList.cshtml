@@ -1,0 +1,41 @@
+﻿@model List<User>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "User List";
+}
+<div class="container-fluid my-5">
+    <h1>User List</h1>
+    <form class="d-flex container" asp-controller="user" asp-action="userList" method="post">
+        <input class="form-control me-2" type="search" asp-for="@Model.FirstOrDefault().Name" placeholder="Search by Email or Name" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-col-xl-4 g-4">
+        @if (Model.Count == 0)
+        {
+            <div > <h1>Not Found</h1></div>
+        }
+        else
+
+        {
+            @foreach (var user in Model)
+            {
+                <div class="col">
+                    <div class="card border-0 shadow bg-dark h-100">
+                        <img src="@user.ProfileImage" class="card-img-top" alt="@user.Name">
+                        <div class="card-body">
+                            <h5 class="card-title">@user.Name</h5>
+                            <p class="card-text">Email : @user.Email</p>
+                            <p class="card-text">Phone : @user.Phone</p>
+                            <p class="card-text">Address : @user.Address</p>
+                            <a asp-controller="user"
+                       asp-action="delete"
+                       asp-route-id="@user.Id" class="btn btn-danger" onclick="return confirm('Delete User?')">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

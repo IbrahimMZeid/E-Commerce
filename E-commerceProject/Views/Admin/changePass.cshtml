@@ -1,0 +1,35 @@
+﻿@model Admin
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Change Password";
+}
+
+<div class="container">
+    <h1>Change Password</h1>
+    <form asp-controller="admin" asp-action="changePass" method="post">
+        <input asp-for="Id" hidden value="@Model.Id"/>
+
+        <label class="form-label" for="OldPass">Old Password</label>
+        <span asp-validation-for="OldPass" class="text-danger"></span>
+        <input type="password" class="form-control ps-4" asp-for="OldPass" placeholder="Old Password" /> 
+        
+        <label class="form-label" asp-for="Password">New Password</label>
+        <span asp-validation-for="Password" class="text-danger"></span>
+        <input type="password" class="form-control ps-4" asp-for="Password" placeholder="Password" />
+
+        <label class="form-label" asp-for="ConfirmPassword">Confirm Password</label>
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <input type="password" class="form-control ps-4" asp-for="ConfirmPassword" placeholder="Confirm Password" />
+
+        <div class="d-flex justify-content-center">
+            <input type="submit" value="Save" />
+        </div>
+
+    </form>
+</div>
+@section Scripts{
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

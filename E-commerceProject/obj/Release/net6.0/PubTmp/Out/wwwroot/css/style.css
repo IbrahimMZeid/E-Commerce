@@ -1,0 +1,76 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Work Sans', sans-serif;
+}
+
+body {
+    width: 100vw;
+    overflow-x: hidden;
+    background-color: #283747;
+    font-weight: 300;
+    color: white;
+}
+
+.navbar-brand img{
+    width: 100px;
+}
+
+form div, input[type=submit] {
+    padding: 20px;
+    /*width: 100%;*/
+}
+
+input, select {
+    padding: 7px;
+    border: 1px solid #31eeD9;
+    border-radius: 40px;
+    color: white;
+}
+
+.form-control {
+    color: white;
+}
+
+input[type=submit] {
+    padding: 15px 25px;
+    background-color: #3197D9;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+    border: #31eeD9;
+    color: white;
+    cursor: pointer;
+}
+
+input:focus, select:focus {
+    outline: none;
+    color: white;
+}
+
+.container {
+    margin: auto;
+    width: 50%;
+    padding: 25px;
+}
+/*.cardcontainer {
+    background-color: #364B60;
+}*/
+/*.card-img-top {
+    height: 15rem;
+    object-fit: cover;
+}*/
+.card-img-top {
+    height: 40vh; /*not want to take all vertical space*/
+    /*width: 100%;*/ /*show all image, autosized, no cut, in available space*/
+}
+
+.img-fluid {
+    max-height: 60vh; /*not want to take all vertical space*/
+}
+
+.row .cd-slider-nav, footer {
+    background-color: rgba(22, 41, 51,0.5);
+}

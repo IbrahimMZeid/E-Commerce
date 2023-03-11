@@ -1,0 +1,75 @@
+﻿@model Product
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Details";
+    int? admin = Context.Session.GetInt32("AdminId");
+    int? userId = Context.Session.GetInt32("UserId");
+}
+<div class="container-fluid my-5">
+    <div class="card mb-3 bg-transparent">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="@Model.Image" class="img-fluid rounded-start" alt="@Model.Title">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Category:  <a asp-controller="category" asp-action="index" asp-route-id="@Model.CategoryId">@Model.Category.Name</a></h5>
+                    <h5 class="card-title">Product Name :  @Model.Title</h5>
+                    <p class="card-text">  Proccessor : @Model.Proccessor</p>
+                    <p class="card-text">  Storage : @Model.Storage</p>
+                    <p class="card-text">  Ram : @Model.Ram</p>
+                    <p class="card-text">  OS : @Model.OS</p>
+                    <p class="card-text">
+                        Price :
+                        @if (Model.Discount > 0)
+                        {
+                            <s class="text-danger">@Model.Price</s>
+                        }
+                        @(Model.Price - (Model.Price * Model.Discount /100)) $
+                    </p>
+                    <p class="card-text">  Describtion : @Model.Describtion.</p>
+                    @if (admin == null)
+                    {
+                        @if ((Model.Carts == null || Model.Carts.Where(c => c.Stats == "In Progress" && c.UserId == userId).ToList().Count == 0) && userId != null)
+                        {
+                            <form asp-controller="cart" asp-action="addToCart"  method="post">
+                                <div class="input-group">
+                                    <input asp-for="Carts.FirstOrDefault().ProductId" hidden value="@Model.Id" />
+                                    <label class="input-group-text" for="number">Number</label>
+                                    <input type="number" class="form-control ps-4 d-inline-block col-8" asp-for="Carts.SingleOrDefault().Number" placeholder="Number" min="1" max="5" value="1" />
+                                    <input type="submit" value="Add To Cart" />
+                                </div>
+                            </form>
+                        }
+                        else if (userId != null)
+                        {
+                            <a class="btn-danger p-2"
+                       asp-route-productId="@Model.Id"
+                       asp-route-userId="@userId"
+                       asp-route-time="@Model.Carts.FirstOrDefault(c => c.Stats.Equals("In Progress")).Time"
+                       asp-action="removeFromCart"
+                       asp-controller="cart" onclick="return confirm('Delete Cart?')">Remove</a>
+                        }
+                    }
+                    else
+                    {
+                        <a asp-action="edit"
+                       asp-controller="product"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-primary">Edit</a>
+                        <a asp-action="changePicture"
+                       asp-controller="product"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-primary">Change picture</a>
+                        <a asp-action="delete"
+                       asp-controller="product"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-danger" onclick="return confirm('Delete Product?')">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

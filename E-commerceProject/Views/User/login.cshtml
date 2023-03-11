@@ -1,0 +1,34 @@
+﻿@model User
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "login";
+}
+<div class="container">
+    <h1>Login</h1>
+    <form asp-controller="user" asp-action="login" method="post">
+
+        <label class="form-label" asp-for="Email">Email</label>
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <input type="email" class="form-control ps-4" asp-for="Email" placeholder="Email" />
+
+        <label class="form-label" asp-for="Password">Password</label>
+        <span asp-validation-for="Password" class="text-danger"></span>
+        <input type="password" class="form-control ps-4" asp-for="Password" placeholder="Password" />
+
+        @if (Model.ErrorMsg != "")
+        {
+            <span class="text-danger">@Model.ErrorMsg</span>
+        }
+
+        <div class="d-flex justify-content-center">
+            <input type="submit"  value="Login" />
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

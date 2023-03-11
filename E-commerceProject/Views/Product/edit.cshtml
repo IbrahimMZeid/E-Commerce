@@ -1,0 +1,57 @@
+﻿@model Product
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Edit Product";
+}
+<div class="container">
+    <h1>Edit Product: @Model.Title</h1>
+    <form asp-controller="product" asp-action="edit" method="post" enctype="multipart/form-data">
+        <input asp-for="Id" hidden value="@Model.Id"/>
+
+        <label class="form-label" asp-for="Title">Title</label>
+        <span asp-validation-for="Title" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Title" placeholder="Title" value="@Model.Title"/>
+
+        <label class="form-label" asp-for="Proccessor">Proccessor</label>
+        <span asp-validation-for="Proccessor" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Proccessor" placeholder="Proccessor" value="@Model.Proccessor"/>
+
+        <label class="form-label" asp-for="OS">Describtion</label>
+        <span asp-validation-for="OS" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="OS" placeholder="OS" value="@Model.OS"/>
+
+        <label class="form-label" asp-for="Storage">Storage</label>
+        <span asp-validation-for="Storage" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Storage" placeholder="Storage" value="@Model.Storage"/>
+
+        <label class="form-label" asp-for="Ram">Ram</label>
+        <span asp-validation-for="Ram" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Ram" placeholder="Ram" value="@Model.Ram"/>
+
+        <label class="form-label" asp-for="Describtion">Describtion</label>
+        <span asp-validation-for="Describtion" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Describtion" placeholder="Describtion" value="@Model.Describtion"/>
+
+        <label class="form-label" asp-for="Price">Price</label>
+        <span asp-validation-for="Price" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Price" placeholder="Price" value="@Model.Price"/>
+
+        <label class="form-label" asp-for="Discount">Discount</label>
+        <span asp-validation-for="Discount" class="text-danger"></span>
+        <input class="form-control ps-4" asp-for="Discount" placeholder="Discount" value="@Model.Discount"/>
+
+        <label class="form-label" asp-for="CategoryId">Category</label>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+        <select class="form-select ps-3 form-select-sm" asp-for="CategoryId" asp-items="@ViewBag.category"></select>
+        
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-success mt-4" value="Save Changes" />
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

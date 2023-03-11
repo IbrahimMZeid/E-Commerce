@@ -1,0 +1,25 @@
+﻿@model Product
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Change Picture";
+}
+<div class="container">
+    <h1>Change Picture of product : @Model.Title</h1>
+    <form asp-controller="product" asp-action="changePicture" method="post" enctype="multipart/form-data">
+        <input asp-for="Id" hidden value="@Model.Id" />
+
+        <label class="form-label" asp-for="Image">Image</label>
+        <span asp-validation-for="Image" class="text-danger"></span>
+        <input type="file" class="form-control ps-4" asp-for="Image" />
+
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-success mt-4" value="Save Changes" />
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
